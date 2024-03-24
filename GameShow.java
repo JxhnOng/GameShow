@@ -1,7 +1,7 @@
 
 import java.io.InputStream;
 import java.util.InputMismatchException;
-//import java.util.InputMismatchException;
+
 import java.util.Scanner;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -72,24 +72,20 @@ public class GameShow {
         
         if(ruleCount==0){
             try {
-                Thread.sleep(1000);
+
                 System.out.println("The rules are simple:");
-                Thread.sleep(1000);
+
                 System.out.println("1. A 10 second clip of a song will be played.");
-                Thread.sleep(3000);
-                System.out.println("2. You will have 20 seconds to think and decide which song is right from 4 options.");
-                Thread.sleep(4000);
-                System.out.println(
-                        "3. If you answer correctly within 20 seconds, you will earn a point. Otherwise you earn none.");
-                Thread.sleep(2000);
+
+                System.out.println("2. You will have to think and decide which song is right from 4 options.");
+
+                System.out.println("3. If you answer correctly, you will earn a point. Otherwise you earn none.");
                 System.out.println("Good luck and have fun!\n");
                 ruleCount++;
                 game();
     
-            } catch (InterruptedException e) {
-                System.out.println("Error: ");
-                e.printStackTrace();
-            } catch (InputMismatchException e) {
+            }
+             catch (Exception e) {
                 System.out.println("Error: Invalid Input, please enter an integer");
             }
         }
@@ -100,7 +96,7 @@ public class GameShow {
             for(int songCount=1;songCount<songs.length;songCount++){
                 int guess;
                 try {
-                    Thread.sleep(3000);
+                   
                     System.out.println("Song #1: Playing.");
                     //randomizer();
                     //for(int i = 0; i <songs.length;i++){ //test
@@ -122,11 +118,8 @@ public class GameShow {
                     }
                     
                     
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                catch (InputMismatchException e){
+                } 
+                catch (Exception e){
                     System.out.println("Error: invalid input.");
                     in.nextLine();
                 }
@@ -137,7 +130,7 @@ public class GameShow {
         
     }
 
-    public static void saveScore() {
+    public static void saveScore(int score) {
 
     }
     public static void randomizer(){
