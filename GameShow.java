@@ -12,6 +12,7 @@ public class GameShow {
     static Scanner in = new Scanner(System.in);
     static int ruleCount=0;
     static int[] songs= {1,2,3,4,5,6,7,8,9,10};
+    //1 my name is
     static int[] answers= {1,2,3,4,5,6,7,8,9,10};
 
     public static void main(String[] args) {
@@ -30,6 +31,7 @@ public class GameShow {
                 System.out.print("Select Option: ");
                 choice = in.nextInt();
                 if (choice == 1) {
+                    
                     game();
                 } else if (choice == 2) {
                     //todo
@@ -66,8 +68,8 @@ public class GameShow {
 
     }
     public static void game() {
+        int score =0;
         
-        System.out.println("Hello Welcome to Name That Tune!");
         if(ruleCount==0){
             try {
                 Thread.sleep(1000);
@@ -82,8 +84,7 @@ public class GameShow {
                 Thread.sleep(2000);
                 System.out.println("Good luck and have fun!\n");
                 ruleCount++;
-    
-                menu();
+                game();
     
             } catch (InterruptedException e) {
                 System.out.println("Error: ");
@@ -96,24 +97,43 @@ public class GameShow {
         else{
             System.out.println("Starting in 3 seconds!");
 
-            //array
-            try {
-                Thread.sleep(3000);
-                System.out.println("Song #1: Playing.");
-                randomizer();
-                for(int i = 0; i <songs.length;i++){
-                    System.out.println("Song #"+songs[i]+ "answer: "+answers[i]);
+            for(int songCount=1;songCount<songs.length;songCount++){
+                int guess;
+                try {
+                    Thread.sleep(3000);
+                    System.out.println("Song #1: Playing.");
+                    //randomizer();
+                    //for(int i = 0; i <songs.length;i++){ //test
+                      //  System.out.println("Song #"+songs[i]+ "answer: "+answers[i]);
+                    //}
+                    
+                    music(songs[songCount]);
+                    System.out.print("Guess: ");
+                    guess = in.nextInt();
+                    if(guess == 1){
+                        System.out.println("Correct");
+                        score++;
+                    }
+                    else if (guess == 2){
+                        System.out.println("2");
+                    }
+                    else{
+                        System.out.println("wrong");
+                    }
+                    
+                    
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
                 }
-                menu();
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                catch (InputMismatchException e){
+                    System.out.println("Error: invalid input.");
+                    in.nextLine();
+                }
             }
-            catch (InputMismatchException e){
-                System.out.println("Error: invalid input.");
-                in.nextLine();
             }
-        }
+            //array
+            
         
     }
 
