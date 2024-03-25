@@ -12,45 +12,46 @@ import javax.sound.sampled.FloatControl;
 
 public class GameShow {
     static Scanner in = new Scanner(System.in);
+    //Variables that will be used throughout the entire program
     static int ruleCount = 0;
     static int[] songs = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-    // 1 my name is 2
-    // 2 ridin dirty 4
-    // 3 sound of the police 3
-    // 4 Still dre
-    // 5 yeah
-    // 6 cha cha slide
-    // 7 hotline bling 1
-    // 8 it was a good day 5
-    // 9 gods plan 6
-    // 10 in da club
     static int[] answers = { 2, 1, 3, 4, 3, 4, 2, 3, 1, 2 };
-
+    /*  Song File # | Song Answer | Answer #
+     0 | My name is | 2
+     1 | Ridin' dirty | 1
+     2 | Sound of da police | 3
+     3 | Still Dre | 4
+     4 | Yeah! | 3
+     5 | cha cha slide | 4
+     6 | hotline bling | 2
+     7 | it was a good day | 3
+     8 | gods plan | 1
+     9 | In da club | 2
+    */
     public static void main(String[] args) {
         menu();
     }
 
-    public static void menu() {
+    public static void menu() { //Menu
+        int choice;
         try {
-            initializeFile();
+            initializeFile(); // Create scores file
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        int choice;
         while (true) {
             try {
                 System.out.println("Name That Tune\n");
                 System.out.println("1) Play");
-                System.out.println("2) Highscore");
+                System.out.println("2) Scores");
                 System.out.println("3) Rules");
                 System.out.println("4) Quit");
                 System.out.print("Select Option: ");
                 choice = in.nextInt();
                 if (choice == 1) {
-
                     game();
                 } else if (choice == 2) {
-                    highscore();
+                    score();
                 } else if (choice == 3) {
                     rules();
                 } else if (choice == 4) {
@@ -62,7 +63,6 @@ public class GameShow {
                     menu();
                 }
             }
-
             catch (Exception e) {
                 System.out.println("Error: Invalid Input.");
                 in.nextLine();
@@ -71,12 +71,11 @@ public class GameShow {
 
     }
 
-    public static void rules() {
+    public static void rules() { //Rule page
         System.out.println("The rules are simple:");
         System.out.println("1. A 10 second clip of a song will be played.");
         System.out.println("2. You will have 20 seconds to think and decide which song is right from 4 options.");
-        System.out.println(
-                "3. If you answer correctly within 20 seconds, you will earn a point. Otherwise you earn none.");
+        System.out.println("3. If you answer correctly within 20 seconds, you will earn a point. Otherwise you earn none.");
         System.out.println("Good luck and have fun!\n");
         ruleCount++;
         menu();
@@ -88,36 +87,39 @@ public class GameShow {
         int toSave;
         int a = 0;
         String name;
-        if (ruleCount == 0) {
+        if (ruleCount == 0) { //If user hasn't read the rules, this will force them to read it.
             try {
                 System.out.println("The rules are simple:");
+                Thread.sleep(1000);
                 System.out.println("1. A 10 second clip of a song will be played. This will only play once.");
+                Thread.sleep(1000);
                 System.out.println("2. You will have to think and decide which song is right from 4 options.");
+                Thread.sleep(1000);
                 System.out.println("3. If you answer correctly, you will earn a point. Otherwise you earn none.");
+                Thread.sleep(1000);
                 System.out.println("Good luck and have fun!\n");
+                Thread.sleep(1000);
                 ruleCount++;
                 game();
             } catch (Exception e) {
                 System.out.println("Error: Invalid Input, please enter an integer");
             }
-        } else {
+        } else { //If user has't read the rules, it wont print it.
             randomizer();
-            System.out.println("Go!");
-
+            System.out.println("Start!");
             for (int songCount = 0; songCount < songs.length; songCount++) {
-
                 try {
                     System.out.println("Song #" + (songCount + 1) + ": Playing. Please wait... :");
                     music(songs[songCount]);
-                    Thread.sleep(10000);
-
+                    Thread.sleep(10000);//Wait for song to play to avoid overlap.
+                    //Song answer options
                     if (songs[songCount] == 0) { // 1 my name is
                         System.out.println("1) Slim Shady \t 2) My Name is \n3) What Is My Name \t 4) What's my name");
                     } else if (songs[songCount] == 1) {// 2 ridin dirty
                         System.out.println("1) Ridin' Dirty  2) They See Me Rollin' \n3) Answer \t 4) They Hatin'");
                     } else if (songs[songCount] == 2) {// 3 sound of the police
                         System.out
-                                .println("1) Police \t 2) The Beast \n3) Sound of The Police \t 4) Sound of The Beast");
+                                .println("1) Police \t 2) The Beast \n3) Sound of Da Police \t 4) Sound of The Beast");
                     } else if (songs[songCount] == 3) {// 4 Still dre
                         System.out.println(
                                 "1) Snoopdog and Dre \t 2) It's Still Dre Day \n3) Guess Who's Back \t 4) Still Dre");
@@ -138,30 +140,26 @@ public class GameShow {
                     } else {
                         System.out.println("Error?");
                     }
-
                     while (true) {
                         System.out.print("Guess: ");
                         guess = in.nextInt();
                         if (guess == answers[songCount]) {
                             System.out.println("Continue...\n");
                             score++;
-
                             break;
                         } else if (guess > 0 && guess < 5) {
                             System.out.println("Continue...\n");
-
                             break;
                         } else {
                             System.out.println("That is not an option, please select a proper option.");
                         }
                     }
-
                 } catch (Exception e) {
                     System.out.println("Error: " + e.getMessage());
                     in.nextLine();
                 }
             }
-
+            //Makes sure the user enters yes or no
             while (a == 0) {
                 try {
                     System.out.println("Final Score: " + score + "/10");
@@ -169,23 +167,23 @@ public class GameShow {
                     System.out.println("1) Yes");
                     System.out.println("2) No");
                     toSave = in.nextInt();
+                    in.nextLine();
                     if (toSave == 1) {
                         while (true) {
                             System.out.println("Enter your name: ");
                             name = in.nextLine();
-                            if (name.isEmpty()) {
+
+                            if ((name.trim()).isEmpty()) {
                                 System.out.println("Please Enter a proper name.");
                             } else {
                                 saveScore(name, score);
                                 break;
                             }
-
                         }
-
                         a++;
-                        // save method
                     } else if (toSave == 2) {
                         a++;
+                        System.out.println("Score Discarded...\n");
                         menu();
                     } else {
                         System.out.println("Please select a proper option");
@@ -201,53 +199,65 @@ public class GameShow {
 
     public static void saveScore(String name, int score) {
         try {
-            File file = new File("highscores.txt");
-            PrintWriter writer = new PrintWriter(new FileWriter(file, true)); // Append mode
-            writer.println(name.toLowerCase() + "," + score);
+            File file = new File("./scores.txt");
+            PrintWriter writer = new PrintWriter(new FileWriter(file, true));
+            writer.println(name.toLowerCase() + "," + score); //Write name and score to file
             writer.close();
+            System.out.println("Score saved\n");
         } catch (IOException e) {
-            System.out.println("Error occurred while saving high score: " + e.getMessage());
+            System.out.println("Error occurred while saving score: " + e.getMessage());
         }
     }
 
-    public static void highscore() {
+    public static void score() {
         try {
-            File file = new File("highscores.txt");
+            File file = new File("./scores.txt"); //Look for scores
             Scanner reader = new Scanner(file);
-            System.out.println("High Scores:");
+            System.out.println("\nName | Score");
             while (reader.hasNextLine()) {
                 String[] data = reader.nextLine().split(",");
                 if (data.length == 2) {
-                    String name = data[0].trim().toLowerCase();
+                    String name = data[0].trim().toLowerCase(); // Sets to lowercase
                     int score = Integer.parseInt(data[1].trim());
-                    System.out.println(name + ": " + score);
+                    System.out.println(name + ": " + score); // Print out file data
                 }
             }
+            System.out.println("Enter any key to Continue...");
+            in.next();
             reader.close();
         } catch (FileNotFoundException e) {
-            System.out.println("No high scores available.");
+            System.out.println("No scores available.");
         }
     }
 
     public static void initializeFile() throws FileNotFoundException {
         // if
         try {
-            File file = new File("./highscore.txt");
-            PrintWriter writer = new PrintWriter(file);
-            writer.write("");
-            writer.close();
+            File file = new File("./scores.txt");
+            if (file.exists()) {
+                if (file.length() == 0) { // Check if file is empty
+                    PrintWriter writer = new PrintWriter(file);
+                    writer.write(""); // Write empty string to file
+                    writer.close();
+                } else {
+                    // File already exists. Skipping initialization
+                }
+
+            } else { // If file does not exist, create it
+                PrintWriter writer = new PrintWriter(file);
+                writer.write(""); // Write empty string to file
+                writer.close();
+            }
         } catch (Exception e) {
             System.out.println(e);
-            ;
         }
     }
 
     public static void randomizer() {
         int n = songs.length;
         for (int i = 0; i < n; i++) {
-            // Generate a random index between i and n - 1
             int randomNum = (int) (Math.random() * (n - i)) + i;
-            // switch around the numbers with cases.
+            // switch around the numbers for random song order.
             int temp = songs[i];
             int temp2 = answers[i];
             songs[i] = songs[randomNum];
@@ -261,12 +271,12 @@ public class GameShow {
     public static void music(int songNum) {
         try {
             String song = Integer.toString(songNum);
-            InputStream music = GameShow.class.getResourceAsStream("./song_" + song + ".wav");
+            InputStream music = GameShow.class.getResourceAsStream("./song_" + song + ".wav"); //Looks for song file depending on what part it is on
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(music);
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
             FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(-20.0f);
+            gainControl.setValue(-10.0f); // Volume adjustment
             if (clip != null || clip.isActive()) {
                 clip.stop();
                 clip.flush();
@@ -275,6 +285,5 @@ public class GameShow {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage()); // If the music doesn't work.
         }
-
     }
 }
