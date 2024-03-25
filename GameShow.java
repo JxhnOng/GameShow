@@ -89,7 +89,7 @@ public class GameShow {
         String name;
         if (ruleCount == 0) { //If user hasn't read the rules, this will force them to read it.
             try {
-                System.out.println("The rules are simple:");
+                System.out.println("\nThe rules are simple:");
                 Thread.sleep(1000);
                 System.out.println("1. A 10 second clip of a song will be played. This will only play once.");
                 Thread.sleep(1000);
@@ -111,51 +111,58 @@ public class GameShow {
                 try {
                     System.out.println("Song #" + (songCount + 1) + ": Playing. Please wait... :");
                     music(songs[songCount]);
-                    Thread.sleep(10000);//Wait for song to play to avoid overlap.
+                    Thread.sleep(0000);//Wait for song to play to avoid overlap.
                     //Song answer options
-                    if (songs[songCount] == 0) { // 1 my name is
+                    if (songs[songCount] == 0) { //  my name is
                         System.out.println("1) Slim Shady \t 2) My Name is \n3) What Is My Name \t 4) What's my name");
-                    } else if (songs[songCount] == 1) {// 2 ridin dirty
+                    } else if (songs[songCount] == 1) {//  ridin dirty
                         System.out.println("1) Ridin' Dirty  2) They See Me Rollin' \n3) Answer \t 4) They Hatin'");
-                    } else if (songs[songCount] == 2) {// 3 sound of the police
+                    } else if (songs[songCount] == 2) {//  sound of da police
                         System.out
                                 .println("1) Police \t 2) The Beast \n3) Sound of Da Police \t 4) Sound of The Beast");
-                    } else if (songs[songCount] == 3) {// 4 Still dre
+                    } else if (songs[songCount] == 3) {//  Still dre
                         System.out.println(
                                 "1) Snoopdog and Dre \t 2) It's Still Dre Day \n3) Guess Who's Back \t 4) Still Dre");
-                    } else if (songs[songCount] == 4) {// 5 yeah
+                    } else if (songs[songCount] == 4) {//  yeah
                         System.out.println("1) Usher \t 2) In The Club \n3) Yeah! \t 4) A Town");
-                    } else if (songs[songCount] == 5) {// 6 cha cha slide
+                    } else if (songs[songCount] == 5) {//  cha cha slide
                         System.out.println("1) Funky \t 2) Clap Your Hands \n3) Criss Cross \t 4) Cha Cha Slide");
-                    } else if (songs[songCount] == 6) {// 7 hotline bling
+                    } else if (songs[songCount] == 6) {//  hotline bling
                         System.out
                                 .println("1) You Used To Call Me \t 2) Hotline Bling \n3) Cellphone \t 4) You Used To");
-                    } else if (songs[songCount] == 7) {// 8 it was a good day
+                    } else if (songs[songCount] == 7) {//  it was a good day
                         System.out.println(
                                 "1) Just Wakin' Up \t 2) It Was a Good Morning \n3) It Was a Good Day \t 4) Today Seems Kinda Odd");
-                    } else if (songs[songCount] == 8) {// 9 gods plan
+                    } else if (songs[songCount] == 8) {//  gods plan
                         System.out.println("1) Gods Plan \t 2) Bad Things \n3) My Plan \t 4) They Wish");
-                    } else if (songs[songCount] == 9) {// 10 in da club
+                    } else if (songs[songCount] == 9) {//  in da club
                         System.out.println("1) It's Yo Birthday \t 2) In Da Club \n3) We Gonna Party \t 4) Birthday");
                     } else {
-                        System.out.println("Error?");
+                        System.out.println("Error: You shouldn't be able to see this....");
                     }
                     while (true) {
                         System.out.print("Guess: ");
-                        guess = in.nextInt();
-                        if (guess == answers[songCount]) {
-                            System.out.println("Continue...\n");
-                            score++;
-                            break;
-                        } else if (guess > 0 && guess < 5) {
-                            System.out.println("Continue...\n");
-                            break;
-                        } else {
-                            System.out.println("That is not an option, please select a proper option.");
+                        if(in.hasNextInt()){
+                            guess = in.nextInt();
+                            if (guess == answers[songCount]) {
+                                System.out.println("Continue...\n");
+                                score++;
+                                break;
+                            } else if (guess > 0 && guess < 5 && guess == (int)guess) {
+                                System.out.println("Continue...\n");
+                                break;
+                            } else {
+                                System.out.println("That is not an option, please select a proper option.");
+                                
+                            }
+                        }else {
+                            System.out.println("Error: Invalid input. Please enter an integer.");
+                            in.nextLine(); // To avoid infinite loop
                         }
+                        
                     }
                 } catch (Exception e) {
-                    System.out.println("Error: " + e.getMessage());
+                    System.out.println("Error: Invalid Input" );
                     in.nextLine();
                 }
             }
@@ -163,7 +170,16 @@ public class GameShow {
             while (a == 0) {
                 try {
                     System.out.println("Final Score: " + score + "/10");
-                    System.out.println("Would you like to save your score?");
+                    if(score>5){
+                        System.out.println("Status: You Win! Be proud of yourself!");
+                    }
+                    else if(score==0){
+                        System.out.println("Status: You Lost... Horribly! Do NOT be proud of yourself!");
+                    }
+                    else{
+                        System.out.println("Status: You Lost... Try harder next time...");
+                    }
+                    System.out.println("\nWould you like to save your score?");
                     System.out.println("1) Yes");
                     System.out.println("2) No");
                     toSave = in.nextInt();
@@ -189,7 +205,7 @@ public class GameShow {
                         System.out.println("Please select a proper option");
                     }
                 } catch (Exception e) {
-                    System.out.println("Error: " + e);
+                    System.out.println("Error: Invalid Input");
                     in.nextLine();
                 }
             }
