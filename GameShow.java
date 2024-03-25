@@ -231,7 +231,6 @@ public class GameShow {
     }
 
     public static void initializeFile() throws FileNotFoundException {
-        // if
         try {
             File file = new File("./scores.txt");
             if (file.exists()) {
