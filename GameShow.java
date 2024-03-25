@@ -185,7 +185,8 @@ public class GameShow {
     }
     public static void music(int songNum) {
         try {
-            InputStream music = GameShow.class.getResourceAsStream("./song" + songNum + ".wav"); // Format "./song(number).wav"
+            String song = Integer.toString(songNum);
+            InputStream music = GameShow.class.getResourceAsStream("./song" + song + ".wav"); // Format "./song(number).wav"
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(music);
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
