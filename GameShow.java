@@ -1,28 +1,24 @@
-
 import java.io.InputStream;
-
-
 import java.util.Scanner;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
-
 public class GameShow {
     static Scanner in = new Scanner(System.in);
-    static int ruleCount=0;
-    static int[] songs= {0,1,2,3,4,5,6,7,8,9};
-    //1 my name is w
-    //2 ridin dirty w
-    //3 sound of the police 
-    //4 Still dre 
-    //5 yeah
-    //6 cha cha slide 
-    //7 hotline bling 
-    //8 it was a good day 
-    //9 gods plan 
-    //10 in da club 
-    static int[] answers= {2,1,3,4,3,4,2,3,1,2};
+    static int ruleCount = 0;
+    static int[] songs = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    // 1 my name is     
+    // 2 ridin dirty 
+    // 3 sound of the police
+    // 4 Still dre
+    // 5 yeah
+    // 6 cha cha slide
+    // 7 hotline bling
+    // 8 it was a good day
+    // 9 gods plan
+    // 10 in da club
+    static int[] answers = { 2, 1, 3, 4, 3, 4, 2, 3, 1, 2 };
 
     public static void main(String[] args) {
         menu();
@@ -40,14 +36,14 @@ public class GameShow {
                 System.out.print("Select Option: ");
                 choice = in.nextInt();
                 if (choice == 1) {
-                    
+
                     game();
                 } else if (choice == 2) {
-                    //todo
-                    //view high schore method
+                    // todo
+                    // view high schore method
                 } else if (choice == 3) {
                     rules();
-                    
+
                 } else if (choice == 4) {
                     System.out.println("Thanks for Playing! ");
                     System.exit(0);
@@ -70,16 +66,18 @@ public class GameShow {
         System.out.println("The rules are simple:");
         System.out.println("1. A 10 second clip of a song will be played.");
         System.out.println("2. You will have 20 seconds to think and decide which song is right from 4 options.");
-        System.out.println("3. If you answer correctly within 20 seconds, you will earn a point. Otherwise you earn none.");
+        System.out.println(
+                "3. If you answer correctly within 20 seconds, you will earn a point. Otherwise you earn none.");
         System.out.println("Good luck and have fun!\n");
         ruleCount++;
         menu();
 
     }
+
     public static void game() {
-        int score =0;
-        
-        if(ruleCount==0){
+        int score = 0;
+
+        if (ruleCount == 0) {
             try {
                 System.out.println("The rules are simple:");
                 System.out.println("1. A 10 second clip of a song will be played. This will only play once.");
@@ -88,87 +86,75 @@ public class GameShow {
                 System.out.println("Good luck and have fun!\n");
                 ruleCount++;
                 game();
-            }
-             catch (Exception e) {
+            } catch (Exception e) {
                 System.out.println("Error: Invalid Input, please enter an integer");
             }
-        }
-        else{
-            //randomizer();
+        } else {
+            // randomizer();
             System.out.println("Go!");
-            
-            for(int songCount = 0 ;songCount < songs.length; songCount++){
-                int guess;
+            int guess;
+            for (int songCount = 0; songCount < songs.length;) {
+                
                 try {
-                    System.out.println("Song #"+ (songCount+1)+": Playing. Please wait... :" +songCount);
-                    music(songs[(songCount)]);
-                    Thread.sleep(5000);
-                    
-                    if(songs[songCount] == 0 ){ //1my name is
-                        System.out.println("1) Slim Shady \t 2) My name is \n3) Answer \t 4) Answer");
-                    }
-                    else if(songs[songCount] == 1 ){//2ridin dirty
-                        System.out.println("1) Ridin' Dirty          2) My name is \n3) Answer \t 4) Answer");
-                    }
-                    else if(songs[songCount] == 2 ){//3 sound of the police
-                        System.out.println("1) Slim Shady \t 2) My name is \n3) Sound of The Police \t 4) Answer");
-                    }
-                    else if(songs[songCount] == 3 ){//4 Still dre
-                        System.out.println("1) Slim Shady \t 2) My name is \n3) Guess Who's Back \t 4) Still Dre");
-                    }
-                    else if(songs[songCount] == 4 ){//5 yeah
-                        System.out.println("1) Slim Shady \t 2) My name is \n3) Yeah! \t 4) Answer");
-                    }
-                    else if(songs[songCount] == 5 ){//6 cha cha slide
-                        System.out.println("1) Slim Shady \t 2) My name is \n3) Answer \t 4) Cha Cha Slide");
-                    }
-                    else if(songs[songCount] == 6 ){//7 hotline bling
-                        System.out.println("1) You Used To Call Me \t 2) Hotline Bling \n3) Cellphone \t 4) Answer");
-                    }
-                    else if(songs[songCount] == 7 ){//8 it was a good day
-                        System.out.println("1) Slim Shady \t 2) My name is \n3) It Was a Good Day \t 4) Answer");
-                    }
-                    else if(songs[songCount] == 8 ){//9 gods plan
-                        System.out.println("1) Gods Plan \t 2) My name is \n3) Answer \t 4) Answer");
-                    }
-                    else if(songs[songCount] == 9 ){//10 in da club
+                    System.out.println("Song #" + (songCount + 1) + ": Playing. Please wait... :" + songCount);
+                    music(songs[songCount]);
+                    //Thread.sleep(10000);
+
+                    if (songs[songCount] == 0) { // 1my name is
+                        System.out.println("1) Slim Shady \t 2) My Name is \n3) What Is My Name \t 4) What's my name");
+                    } else if (songs[songCount] == 1) {// 2ridin dirty
+                        System.out.println("1) Ridin' Dirty          2) They See Me Rollin' \n3) Answer \t 4) They Hatin'");
+                    } else if (songs[songCount] == 2) {// 3 sound of the police
+                        System.out.println("1) Police \t 2) The Beast \n3) Sound of The Police \t 4) Sound of The Beast");
+                    } else if (songs[songCount] == 3) {// 4 Still dre
+                        System.out.println("1) Snoopdog and Dre \t 2) It's Still Dre Day \n3) Guess Who's Back \t 4) Still Dre");
+                    } else if (songs[songCount] == 4) {// 5 yeah
+                        System.out.println("1) Usher \t 2) In The Club \n3) Yeah! \t 4) A Town");
+                    } else if (songs[songCount] == 5) {// 6 cha cha slide
+                        System.out.println("1) Funky \t 2) Clap Your Hands \n3) Criss Cross \t 4) Cha Cha Slide");
+                    } else if (songs[songCount] == 6) {// 7 hotline bling
+                        System.out.println("1) You Used To Call Me \t 2) Hotline Bling \n3) Cellphone \t 4) You Used To");
+                    } else if (songs[songCount] == 7) {// 8 it was a good day
+                        System.out.println("1) Just Wakin' Up \t 2) It Was a Good Morning \n3) It Was a Good Day \t 4) Today Seems Kinda Odd");
+                    } else if (songs[songCount] == 8) {// 9 gods plan
+                        System.out.println("1) Gods Plan \t 2) Bad Things \n3) My Plan \t 4) They Wish");
+                    } else if (songs[songCount] == 9) {// 10 in da club
                         System.out.println("1) It's Yo Birthday \t 2) In Da Club \n3) We Gonna Party \t 4) Birthday");
-                    }
-                    else{
+                    } else {
                         System.out.println("Error?");
                     }
-                     //Forces the user to listen to the song before inputting to avoid song overlap.
-                     while(true){
+                    
+                    while (true) {
                         System.out.print("Guess: ");
                         guess = in.nextInt();
-                        if(guess == answers[songCount]){
+                        if (guess == answers[songCount]) {
                             System.out.println("Correct...\n");
                             score++;
+                            songCount++;
                             break;
-                        }
-                        else if(guess > 0 && guess < 5){
+                        } else if (guess > 0 && guess < 5) {
                             System.out.println("Continue...\n");
+                            songCount++;
                             break;
-                        }
-                        else{
+                        } else {
                             System.out.println("That is not an option, please select a proper option.");
                         }
                     }
-                   
-                } 
-                catch (Exception e){
-                    System.out.println("Error: invalid input.");
+
+                } catch (Exception e) {
+                    System.out.println("Error: " + e.getMessage());
                     in.nextLine();
                 }
             }
-                System.out.println("Final Score: "+score+"/10");
-            }
+            System.out.println("Final Score: " + score + "/10");
+        }
     }
 
     public static void saveScore(int score) {
 
     }
-    public static void randomizer(){
+
+    public static void randomizer() {
         int n = songs.length;
         for (int i = 0; i < n; i++) {
             // Generate a random index between i and n - 1
@@ -183,19 +169,24 @@ public class GameShow {
         }
 
     }
+
     public static void music(int songNum) {
         try {
-            String song = Integer.toString(songNum);
-            InputStream music = GameShow.class.getResourceAsStream("./song" + song + ".wav"); // Format "./song(number).wav"
+            //String song = Integer.toString(songNum);
+            InputStream music = GameShow.class.getResourceAsStream("./song" + (songNum) + ".wav"); 
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(music);
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
             FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
             gainControl.setValue(-20.0f);
+            if (clip != null || clip.isActive()) {
+                clip.stop();
+                clip.drain();
+                clip.flush();
+            }
             clip.start(); // Starts the music
-        }
-        catch (Exception e) {
-            System.out.println("Music file not found\n"); // If the music doesn't work.
+        } catch (Exception e) {
+            System.out.println("Error: "+e.getMessage()); // If the music doesn't work.
         }
 
     }
