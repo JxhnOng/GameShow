@@ -1,3 +1,8 @@
+//Author: John Ong
+//Date: March 25, 2024
+//Description: Game show coding assignment. Game: Name That tune
+//Challenge Features added: Music, Save data.
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -41,7 +46,7 @@ public class GameShow {
         }
         while (true) {
             try {
-                System.out.println("Name That Tune\n");
+                System.out.println("Welcome to: \nName That Tune\n");
                 System.out.println("1) Play");
                 System.out.println("2) Scores");
                 System.out.println("3) Rules");
@@ -98,7 +103,7 @@ public class GameShow {
                 System.out.println("3. If you answer correctly, you will earn a point. Otherwise you earn none.");
                 Thread.sleep(1000);
                 System.out.println("Good luck and have fun!\n");
-                Thread.sleep(1000);
+                Thread.sleep(10000);
                 ruleCount++;
                 game();
             } catch (Exception e) {
@@ -111,7 +116,7 @@ public class GameShow {
                 try {
                     System.out.println("Song #" + (songCount + 1) + ": Playing. Please wait... :");
                     music(songs[songCount]);
-                    Thread.sleep(0000);//Wait for song to play to avoid overlap.
+                    Thread.sleep(10000);//Wait for song to play to avoid overlap.
                     //Song answer options
                     if (songs[songCount] == 0) { //  my name is
                         System.out.println("1) Slim Shady \t 2) My Name is \n3) What Is My Name \t 4) What's my name");
@@ -144,6 +149,7 @@ public class GameShow {
                         System.out.print("Guess: ");
                         if(in.hasNextInt()){
                             guess = in.nextInt();
+                            //Ensures the user does not input anything other than a number from 1-4
                             if (guess == answers[songCount]) {
                                 System.out.println("Continue...\n");
                                 score++;
@@ -179,6 +185,7 @@ public class GameShow {
                     else{
                         System.out.println("Status: You Lost... Try harder next time...");
                     }
+                    //Asks the user to save the score
                     System.out.println("\nWould you like to save your score?");
                     System.out.println("1) Yes");
                     System.out.println("2) No");
@@ -189,7 +196,7 @@ public class GameShow {
                             System.out.println("Enter your name: ");
                             name = in.nextLine();
 
-                            if ((name.trim()).isEmpty()) {
+                            if ((name.trim()).isEmpty()) { //To ensure the user doesn't just enter an empty name
                                 System.out.println("Please Enter a proper name.");
                             } else {
                                 saveScore(name, score);
